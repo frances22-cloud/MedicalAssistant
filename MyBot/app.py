@@ -3,7 +3,8 @@ import random
 import numpy as np
 import nltk
 from nltk.stem import WordNetLemmatizer
-from tensorflow.keras.models import load_model
+from tensorflow import keras
+from keras.models import load_model
 import pickle
 from flask import Flask, render_template, request, jsonify
 
