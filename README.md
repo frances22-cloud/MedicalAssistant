@@ -24,7 +24,19 @@ MediBot is a Python-based NLP chatbot designed to act as a personal medical assi
    Ensure you have Python 3.x and pip installed. Then install required Python packages:
 
    ```bash
-   pip install flask nltk tensorflow
+   pip install flask
+   ```
+   ```bash
+   pip install nltk 
+   ```
+   ```bash
+   pip install tensorflow
+   ```
+   ```bash
+   pip install keras
+   ```
+   ```bash
+   pip install numpy
    ```
 
 3. **Download NLTK Data:**
