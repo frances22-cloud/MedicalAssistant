@@ -8,27 +8,29 @@ import pickle
 from flask import Flask, render_template, request, jsonify
 
 # Download necessary NLTK data
-nltk.download('punkt')
-nltk.download('wordnet')
+nltk.download("punkt")
+nltk.download("wordnet")
 
 # Initialize Flask app
 app = Flask(__name__)
 
 # Load the model and data structures
-model = load_model('chatbot_model.h5')
+model = load_model("chatbot_model.h5")
 lemmatizer = WordNetLemmatizer()
-words = pickle.load(open('words.pkl', 'rb'))
-classes = pickle.load(open('classes.pkl', 'rb'))
+words = pickle.load(open("words.pkl", "rb"))
+classes = pickle.load(open("classes.pkl", "rb"))
 
 # Load intents file
-with open('intents.json') as file:
+with open("intents.json") as file:
     data = json.load(file)
+
 
 # Preprocess user input
 def clean_up_sentence(sentence):
     sentence_words = nltk.word_tokenize(sentence)
     sentence_words = [lemmatizer.lemmatize(word.lower()) for word in sentence_words]
     return sentence_words
+
 
 def bow(sentence, words):
     sentence_words = clean_up_sentence(sentence)
@@ -38,6 +40,7 @@ def bow(sentence, words):
             if w == s:
                 bag[i] = 1
     return np.array(bag)
+
 
 def predict_class(sentence, model):
     p = bow(sentence, words)
@@ -50,18 +53,21 @@ def predict_class(sentence, model):
         return_list.append({"intent": classes[r[0]], "probability": str(r[1])})
     return return_list
 
+
 def get_response(intents_list, intents_json):
-    tag = intents_list[0]['intent']
-    list_of_intents = intents_json['intents']
+    tag = intents_list[0]["intent"]
+    list_of_intents = intents_json["intents"]
     for i in list_of_intents:
-        if i['tag'] == tag:
-            result = random.choice(i['responses'])
+        if i["tag"] == tag:
+            result = random.choice(i["responses"])
             break
     return result
+
 
 @app.route("/")
 def home():
     return render_template("index.html")
+
 
 @app.route("/get", methods=["POST"])
 def chatbot_response():
@@ -69,6 +75,7 @@ def chatbot_response():
     ints = predict_class(msg, model)
     res = get_response(ints, data)
     return jsonify({"response": res})
+
 
 if __name__ == "__main__":
     app.run(debug=True)
