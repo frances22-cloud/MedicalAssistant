@@ -1,73 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My personal assistant</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: skyblue;
-            position: relative; /* Ensure positioning context for absolutely positioned elements */
-            padding-left: 150px; /* Adjust to accommodate the image width */
-        }
-        .chat-container {
-            max-width: 600px;
-            margin: 50px auto;
-        }
-        .chat-box {
-            width: 100%;
-            height: 300px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            overflow-y: scroll;
-            background-color: white; /* Background color for the message box */
-            border-radius: 10px; /* Rounded corners for the message box */
-        }
-        .input-box {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-        }
-        .bot-image {
-            position: absolute;
-            top: 20px; /* Adjust as needed */
-            left: 20px; /* Adjust as needed */
-            width: 120px; /* Adjust width */
-            height: auto; /* Maintain aspect ratio */
-            z-index: 10; /* Ensure it's above other content */
-        }
-    </style>
-</head>
-<body>
-    <img src="../images/img1.png" alt="" class="bot-image">
-    <h1 style="text-align: center; color: black;">Welcome to MediBot</h1>
-    <div class="chat-container">
-        <div class="chat-box" id="chat-box"></div>
-        <input type="text" id="user-input" class="input-box" placeholder="Type your message here...">
-    </div>
-    <script>
-        document.getElementById('user-input').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                var userInput = this.value;
-                this.value = '';
-                var chatBox = document.getElementById('chat-box');
-                chatBox.innerHTML += '<p><strong>You:</strong> ' + userInput + '</p>';
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>MediBot | My Personal Medical Assistant</title>
+		<link rel="stylesheet" href="styles.css" />
+		<link rel="icon" href="../images/favicon.png" type="image/png" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
 
-                fetch('/get', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: 'msg=' + userInput
-                })
-                .then(response => response.json())
-                .then(data => {
-                    chatBox.innerHTML += '<p><strong>Bot:</strong> ' + data.response + '</p>';
-                    chatBox.scrollTop = chatBox.scrollHeight;
-                });
-            }
-        });
-    </script>
-</body>
+	<body>
+		<div class="container">
+			<div class="header">
+				<img src="../images/favicon.png" alt="icon" />
+				<div class="header-text">
+					<h2>MediBot</h2>
+					<p>My Personal Medical Assistant</p>
+				</div>
+			</div>
+
+			<div class="chat-container">
+				<div class="chat-box" id="chat-box"></div>
+				<input
+					type="text"
+					id="user-input"
+					class="input-box"
+					placeholder="Type your message here..."
+				/>
+			</div>
+
+			<script>
+				document
+					.getElementById("user-input")
+					.addEventListener("keypress", function (e) {
+						if (e.key === "Enter") {
+							var userInput = this.value;
+							this.value = "";
+							var chatBox = document.getElementById("chat-box");
+							chatBox.innerHTML +=
+								"<p><strong>You:</strong> " + userInput + "</p>";
+
+							fetch("/get", {
+								method: "POST",
+								headers: {
+									"Content-Type": "application/x-www-form-urlencoded",
+								},
+								body: "msg=" + userInput,
+							})
+								.then((response) => response.json())
+								.then((data) => {
+									chatBox.innerHTML +=
+										"<p><strong>Bot:</strong> " + data.response + "</p>";
+									chatBox.scrollTop = chatBox.scrollHeight;
+								});
+						}
+					});
+			</script>
+		</div>
+	</body>
 </html>
