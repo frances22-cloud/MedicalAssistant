@@ -24,14 +24,14 @@ body {
     align-items: center;
 }
 
-.header-text {
-    margin: 0;
-    padding: 0;
-}
-
 .header img {
     height: 60px;
     padding-right: 50px;
+}
+
+.header-text {
+    margin: 0;
+    padding: 0;
 }
 
 .chat-container {
