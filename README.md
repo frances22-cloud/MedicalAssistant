@@ -16,7 +16,7 @@ MediBot is a Python-based NLP chatbot designed to act as a personal medical assi
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/frances/medibot.git
+   git clone https://github.com/frances22-cloud/MedicalAssistant
    cd medibot
    ```
 
