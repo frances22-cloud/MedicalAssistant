@@ -4,7 +4,11 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>MediBot | Personal Medical Assistant</title>
-		<link rel="icon" href="../images/favicon.png" type="image/png" />
+		<link
+			rel="icon"
+			href="{{ url_for('static', filename='images/favicon.png') }}"
+			type="image/png"
+		/>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -75,7 +79,10 @@
 	<body>
 		<div class="container">
 			<div class="header">
-				<img src="../images/favicon.png" alt="icon" />
+				<img
+					src="{{ url_for('static', filename='images/favicon.png') }}"
+					alt="icon"
+				/>
 				<div class="header-text">
 					<h2>MediBot</h2>
 					<p>My Personal Medical Assistant</p>
