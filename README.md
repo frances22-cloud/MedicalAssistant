@@ -18,9 +18,7 @@ MediBot is a Python-based NLP chatbot designed to act as a personal medical assi
    ```bash
    git clone https://github.com/frances22-cloud/MedicalAssistant
    ```
-   ```bash
-   cd medibot
-   ```
+
 
 2. **Install Dependencies:**
    Ensure you have Python 3.x and pip installed. Then install required Python packages:
